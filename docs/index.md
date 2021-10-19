@@ -1,0 +1,3 @@
+# mia_template_service_name_placeholder
+
+%CUSTOM_PLUGIN_SERVICE_DESCRIPTION%

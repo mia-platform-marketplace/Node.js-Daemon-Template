@@ -1,0 +1,48 @@
+{
+  "name": "mia_template_service_name_placeholder",
+  "version": "0.0.1",
+  "description": "%CUSTOM_PLUGIN_SERVICE_DESCRIPTION%",
+  "license": "SEE LICENSE IN LICENSE",
+  "author": "%CUSTOM_PLUGIN_CREATOR_USERNAME%",
+  "main": "index.js",
+  "scripts": {
+    "checkonly": "! grep -R '\\.only' tests/",
+    "coverage": "npm run unit -- --coverage-report=text-summary",
+    "postcoverage": "tap --coverage-report=lcov --no-browser",
+    "lint": "eslint . --ignore-path=.gitignore",
+    "start": "lc39 index.js",
+    "start:local": "npm start -- --env-path ./default.env",
+    "test": "npm run lint && npm run unit && npm run checkonly",
+    "update-docker-version": "sed -i.bck \"s|version=\\\"[0-9]*\\.[0-9]*\\.[0-9]*.*\\\"|version=\\\"${npm_package_version}\\\"|\" Dockerfile",
+    "update-changelog": "node ./scripts/update-changelog.js ${npm_package_version}",
+    "unit": "tap -b tests/*.test.js",
+    "version": "npm run update-changelog && npm run update-docker-version && rm -fr Dockerfile.bck && git add CHANGELOG.md Dockerfile"
+  },
+  "repository": {
+    "type": "git",
+    "url": "%GITLAB_BASE_URL%/%CUSTOM_PLUGIN_PROJECT_FULL_PATH%.git"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "@mia-platform/eslint-config-mia": "^3.0.0",
+    "pre-commit": "^1.2.2",
+    "tap": "^15.0.10"
+  },
+  "dependencies": {
+    "ajv": "^8.6.3",
+    "pino": "^7.0.2"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "private": true,
+  "eslintConfig": {
+    "extends": "@mia-platform/eslint-config-mia"
+  },
+  "tap": {
+    "branches": 75,
+    "lines": 90,
+    "functions": 100,
+    "statements": 90
+  }
+}
